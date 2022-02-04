@@ -1,0 +1,206 @@
+<!--
+Purchase Management (PM) 
+Copyright (C) 2022  D P Bennett & Associates Limited
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+Email: info@dpbennett.com.jm
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <p:panel id="orderDetail" 
+             style="margin-bottom: 1px;" > 
+        <h:panelGrid columns="2">
+            
+            <h:outputLabel value="Purchase Order No.: " style="font-weight: bold;font-size: 14px;" />
+            <h:panelGroup>
+                <h:panelGroup id="poNumberGroup">
+
+                    <h:outputText id="poNumber" 
+                                  rendered="#{purchasingManager.selectedPurchaseRequisition.autoGenerateNumber}"
+                                  value="#{purchasingManager.selectedPurchaseRequisition.purchaseOrderNumber}" 
+                                  styleClass="pr-number"/>
+
+                    <p:inputText id="poNumberEdit"                                 
+                                 rendered="#{!purchasingManager.selectedPurchaseRequisition.autoGenerateNumber}"
+                                 size="35"
+                                 maxlength="40"      
+                                 validator="purchaseOrderNumberValidator"
+                                 title="#{purchasingManager.selectedPurchaseRequisition.purchaseOrderNumber}"
+                                 value="#{purchasingManager.selectedPurchaseRequisition.purchaseOrderNumber}">
+
+                        <f:attribute name="selectedPurchaseReqId" 
+                                     value="#{purchasingManager.selectedPurchaseRequisition.id}" />
+                        <f:attribute name="autoGeneratePONumber" 
+                                     value="#{purchasingManager.selectedPurchaseRequisition.autoGenerateNumber}" />
+
+                        <p:ajax event="change"                            
+                                update=":purchreqDialogForm:purchreqDetailToolbar1"
+                                listener="#{purchasingManager.updatePurchaseReq}"
+                                process="@this"/>
+
+                    </p:inputText>
+                </h:panelGroup>
+                <p:spacer height="0" width="5"/>
+                <p:selectBooleanCheckbox id="autoGeneratePO" 
+                                         itemLabel="auto"
+                                         style="vertical-align: middle"                                         
+                                         rendered="#{purchasingManager.user.privilege.canBeJMTSAdministrator}"
+                                         value="#{purchasingManager.selectedPurchaseRequisition.autoGenerateNumber}" >
+
+                    <p:ajax listener="#{purchasingManager.updateAutoGeneratePONumber}" 
+                            event="change"
+                            update="prNumberGroup,poNumberGroup,autoGenerate,:purchreqDialogForm:purchreqDetailToolbar1"
+                            global="false"                        
+                            process="@this"/>
+
+                </p:selectBooleanCheckbox>            
+                <p:tooltip for="autoGeneratePO" value="Check to auto-generate number" showEffect="fade" hideEffect="fade" />
+
+            </h:panelGroup>
+
+            <h:outputText value="Purchase Order Date:" />
+            <p:calendar value="#{purchasingManager.selectedPurchaseRequisition.purchaseOrderDate}" 
+                        readonlyInput="false"
+                        disabled="#{!purchasingManager.isProcurementOfficer}" 
+                        navigator="true" 
+                        pattern="MMM dd, yyyy" >
+
+                <p:ajax event="dateSelect"
+                        update=":purchreqDialogForm:purchreqDetailToolbar1"
+                        listener="#{purchasingManager.updatePurchaseReq}" />
+
+                <p:ajax event="keyup"
+                        update=":purchreqDialogForm:purchreqDetailToolbar1"
+                        listener="#{purchasingManager.updatePurchaseReq}" />
+
+            </p:calendar>
+            
+            <h:outputText value="Quotation number:" />
+            <p:inputText disabled="#{!purchasingManager.isProcurementOfficer}" 
+                         value="#{purchasingManager.selectedPurchaseRequisition.quotationNumber}" > 
+
+                <p:ajax event="change"                            
+                        update=":purchreqDialogForm:purchreqDetailToolbar1"
+                        listener="#{purchasingManager.updatePurchaseReq}"
+                        process="@this"/>
+
+            </p:inputText>
+
+            <h:outputText value="Import licence no.:" />
+            <p:inputText disabled="#{!purchasingManager.isProcurementOfficer}" 
+                         value="#{purchasingManager.selectedPurchaseRequisition.importLicenceNum}" > 
+
+                <p:ajax event="change"                            
+                        update=":purchreqDialogForm:purchreqDetailToolbar1"
+                        listener="#{purchasingManager.updatePurchaseReq}"
+                        process="@this"/>
+
+            </p:inputText>
+
+            <h:outputText value="Import license date:" />
+            <p:calendar value="#{purchasingManager.selectedPurchaseRequisition.importLicenceDate}" 
+                        disabled="#{!purchasingManager.isProcurementOfficer}" 
+                        readonlyInput="false"
+                        navigator="true" 
+                        pattern="MMM dd, yyyy" >
+
+                <p:ajax event="dateSelect"
+                        update=":purchreqDialogForm:purchreqDetailToolbar1"
+                        listener="#{purchasingManager.updatePurchaseReq}" />
+
+                <p:ajax event="keyup"
+                        update=":purchreqDialogForm:purchreqDetailToolbar1"
+                        listener="#{purchasingManager.updatePurchaseReq}" />
+
+            </p:calendar>
+            
+            <h:outputText value="Delivery date required:" />
+            <p:calendar value="#{purchasingManager.selectedPurchaseRequisition.deliveryDateRequired}"
+                        disabled="#{!purchasingManager.isProcurementOfficer}" 
+                        readonlyInput="false"
+                        navigator="true" 
+                        pattern="MMM dd, yyyy" >
+
+                <p:ajax event="dateSelect"
+                        update=":purchreqDialogForm:purchreqDetailToolbar1"
+                        listener="#{purchasingManager.updatePurchaseReq}" />
+
+                <p:ajax event="keyup"
+                        update=":purchreqDialogForm:purchreqDetailToolbar1"
+                        listener="#{purchasingManager.updatePurchaseReq}" />
+
+            </p:calendar>
+            
+            <h:outputText value="Terms:" />       
+            <p:inputText disabled="#{!purchasingManager.isProcurementOfficer}" 
+                         maxlength="20"
+                         value="#{purchasingManager.selectedPurchaseRequisition.terms}" > 
+
+                <p:ajax event="change"                            
+                        update=":purchreqDialogForm:purchreqDetailToolbar1"
+                        listener="#{purchasingManager.updatePurchaseReq}"
+                        process="@this"/>
+
+            </p:inputText>
+            
+            <h:outputText value="Shipping instructions:" />       
+            <p:inputTextarea
+                id="shippingInstructions"
+                value="#{purchasingManager.selectedPurchaseRequisition.shippingInstructions}"
+                disabled="#{!purchasingManager.isProcurementOfficer}" 
+                rows="2"
+                counter="shippingInstructionsCharsRemaining"
+                counterTemplate="{0} characters remaining."
+                autoResize="false"
+                maxlength="80"  
+                style="width: 150%;">
+
+                <p:ajax event="change"
+                        update=":purchreqDialogForm:purchreqDetailToolbar1"
+                        listener="#{purchasingManager.updatePurchaseReq}"
+                        process="@this"/>
+
+            </p:inputTextarea> 
+            <h:outputText value="&nbsp;&nbsp;" />
+            <h:outputText id="shippingInstructionsCharsRemaining" /> 
+            
+            <h:outputText value="Please supply:" />       
+            <p:inputTextarea
+                id="pleaseSupply"
+                value="#{purchasingManager.selectedPurchaseRequisition.pleaseSupplyNote}"
+                disabled="#{!purchasingManager.isProcurementOfficer}" 
+                rows="2"
+                counter="pleaseSupplyCharsRemaining"
+                counterTemplate="{0} characters remaining."
+                autoResize="false"
+                maxlength="80"  
+                style="width: 150%;">
+
+                <p:ajax event="change"
+                        update=":purchreqDialogForm:purchreqDetailToolbar1"
+                        listener="#{purchasingManager.updatePurchaseReq}"
+                        process="@this"/>
+
+            </p:inputTextarea> 
+            <h:outputText value="&nbsp;&nbsp;" />
+            <h:outputText id="pleaseSupplyCharsRemaining" /> 
+
+        </h:panelGrid>
+    </p:panel>
+
+</html>
