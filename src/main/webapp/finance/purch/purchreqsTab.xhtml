@@ -30,77 +30,77 @@ Email: info@dpbennett.com.jm
             <p:commandButton 
                 value="New"
                 icon="pi pi-plus"
-                actionListener="#{purchasingManager.createNewPurchaseReq}"                                            
+                actionListener="#{laboratoryManager.createNewPurchaseReq}"                                            
                 process="@this"
                 title="Add a new purchase requisition" >
 
                 <p:ajax event="dialogReturn" 
-                        listener="#{purchasingManager.purchaseReqDialogReturn}"
+                        listener="#{laboratoryManager.purchaseReqDialogReturn}"
                         update=":appForm:mainTabView:purchasereqsTable"/>
 
             </p:commandButton>
             <ui:remove>
-                <p:spacer width="10" rendered="#{!purchasingManager.user.privilege.canBeFinancialAdministrator}" />
+                <p:spacer width="10" rendered="#{!laboratoryManager.user.privilege.canBeFinancialAdministrator}" />
                 <p:inputText id="purchaseReqSearchText" 
                              placeholder="Enter search text"
                              style="width:110px" 
-                             rendered="#{!purchasingManager.user.privilege.canBeFinancialAdministrator}"
-                             value="#{purchasingManager.purchaseReqSearchText}" >
+                             rendered="#{!laboratoryManager.user.privilege.canBeFinancialAdministrator}"
+                             value="#{laboratoryManager.purchaseReqSearchText}" >
 
                     <p:ajax event="keyup"                            
                             global="false"
                             update=":appForm:mainTabView:purchasereqsTable"
-                            listener="#{purchasingManager.doPurchaseReqSearch}"
+                            listener="#{laboratoryManager.doPurchaseReqSearch}"
                             process="@this"/>
 
                 </p:inputText>
-                <p:spacer width="10" rendered="#{!purchasingManager.user.privilege.canBeFinancialAdministrator}" />
-                <p:selectOneMenu value="#{purchasingManager.dateSearchPeriod.dateField}" 
-                                 rendered="#{!purchasingManager.user.privilege.canBeFinancialAdministrator}"
+                <p:spacer width="10" rendered="#{!laboratoryManager.user.privilege.canBeFinancialAdministrator}" />
+                <p:selectOneMenu value="#{laboratoryManager.dateSearchPeriod.dateField}" 
+                                 rendered="#{!laboratoryManager.user.privilege.canBeFinancialAdministrator}"
                                  id="purchDateField" >
                     <p:ajax                        
                         update=":appForm:mainTabView:purchasereqsTable"
-                        listener="#{purchasingManager.doPurchaseReqSearch}"
+                        listener="#{laboratoryManager.doPurchaseReqSearch}"
                         process="@this" />
 
                     <f:selectItems value="#{financeManager.dateSearchFields}" />
 
                 </p:selectOneMenu>
-                <h:outputText value=" : " rendered="#{!purchasingManager.user.privilege.canBeFinancialAdministrator}" />
+                <h:outputText value=" : " rendered="#{!laboratoryManager.user.privilege.canBeFinancialAdministrator}" />
                 <p:calendar id="purchStartSearchDate"
-                            value="#{purchasingManager.dateSearchPeriod.startDate}"                    
+                            value="#{laboratoryManager.dateSearchPeriod.startDate}"                    
                             size="17"
                             navigator="true"
-                            rendered="#{!purchasingManager.user.privilege.canBeFinancialAdministrator}"
+                            rendered="#{!laboratoryManager.user.privilege.canBeFinancialAdministrator}"
                             validator="requiredFieldValidator"
                             pattern="MMM dd, yyyy" >
 
                     <p:ajax event="dateSelect"
                             update=":appForm:mainTabView:purchasereqsTable"
-                            listener="#{purchasingManager.doPurchaseReqSearch}" />
+                            listener="#{laboratoryManager.doPurchaseReqSearch}" />
 
                     <p:ajax event="keyup"
                             update=":appForm:mainTabView:purchasereqsTable"
-                            listener="#{purchasingManager.doPurchaseReqSearch}" />
+                            listener="#{laboratoryManager.doPurchaseReqSearch}" />
 
 
                 </p:calendar>
-                <h:outputText value=" to " rendered="#{!purchasingManager.user.privilege.canBeFinancialAdministrator}"/>
+                <h:outputText value=" to " rendered="#{!laboratoryManager.user.privilege.canBeFinancialAdministrator}"/>
                 <p:calendar id="purchEndSearchDate"
-                            value="#{purchasingManager.dateSearchPeriod.endDate}"                    
+                            value="#{laboratoryManager.dateSearchPeriod.endDate}"                    
                             size="17"
                             navigator="true"
-                            rendered="#{!purchasingManager.user.privilege.canBeFinancialAdministrator}"
+                            rendered="#{!laboratoryManager.user.privilege.canBeFinancialAdministrator}"
                             validator="requiredFieldValidator"
                             pattern="MMM dd, yyyy" >
 
                     <p:ajax event="dateSelect"
                             update=":appForm:mainTabView:purchasereqsTable"
-                            listener="#{purchasingManager.doPurchaseReqSearch}" />
+                            listener="#{laboratoryManager.doPurchaseReqSearch}" />
 
                     <p:ajax event="keyup"
                             update=":appForm:mainTabView:purchasereqsTable"
-                            listener="#{purchasingManager.doPurchaseReqSearch}" />
+                            listener="#{laboratoryManager.doPurchaseReqSearch}" />
 
                 </p:calendar>
             </ui:remove>
@@ -116,12 +116,12 @@ Email: info@dpbennett.com.jm
                  paginator="true"                                 
                  rows="15"
                  paginatorTemplate="{FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
-                 value="#{purchasingManager.foundPurchaseReqs}">                        
+                 value="#{laboratoryManager.foundPurchaseReqs}">                        
 
-        <p:ajax event="cellEdit" listener="#{purchasingManager.onPurchaseReqCellEdit}" />
+        <p:ajax event="cellEdit" listener="#{laboratoryManager.onPurchaseReqCellEdit}" />
 
         <f:facet name="header">
-            <h:outputText value="#{purchasingManager.purchaseReqsTableHeader}" />
+            <h:outputText value="#{laboratoryManager.purchaseReqsTableHeader}" />
         </f:facet>
 
         <p:column>
@@ -172,15 +172,15 @@ Email: info@dpbennett.com.jm
 
         <p:column style="width:32px">
             <p:commandButton icon="pi pi-pencil"
-                             actionListener="#{purchasingManager.editSelectedPurchaseReq}"
+                             actionListener="#{laboratoryManager.editSelectedPurchaseReq}"
                              process="@this"
                              title="View or edit this PR's detail">
 
                 <f:setPropertyActionListener value="#{pr}" 
-                                             target="#{purchasingManager.selectedPurchaseRequisition}" />
+                                             target="#{laboratoryManager.selectedPurchaseRequisition}" />
 
                 <p:ajax event="dialogReturn" 
-                        listener="#{purchasingManager.purchaseReqDialogReturn}"
+                        listener="#{laboratoryManager.purchaseReqDialogReturn}"
                         update=":appForm:mainTabView:purchasereqsTable"/>
 
             </p:commandButton>
@@ -192,12 +192,12 @@ Email: info@dpbennett.com.jm
             <p:commandButton 
                 value="New"
                 icon="pi pi-plus" 
-                actionListener="#{purchasingManager.createNewPurchaseReq}"                                            
+                actionListener="#{laboratoryManager.createNewPurchaseReq}"                                            
                 process="@this"
                 title="Add a new purchase requisition" >
 
                 <p:ajax event="dialogReturn" 
-                        listener="#{purchasingManager.purchaseReqDialogReturn}"
+                        listener="#{laboratoryManager.purchaseReqDialogReturn}"
                         update=":appForm:mainTabView:purchasereqsTable"/>
 
             </p:commandButton>

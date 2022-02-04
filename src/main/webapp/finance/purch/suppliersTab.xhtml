@@ -30,39 +30,39 @@ Email: info@dpbennett.com.jm
             <p:commandButton 
                 value="New"
                 icon="pi pi-plus" 
-                actionListener="#{purchasingManager.addNewSupplier}"                                            
+                actionListener="#{laboratoryManager.addNewSupplier}"                                            
                 process="@this"
                 title="Add a new supplier" >
 
                 <p:ajax event="dialogReturn" 
-                        listener="#{purchasingManager.doSupplierSearch}"
+                        listener="#{laboratoryManager.doSupplierSearch}"
                         update=":appForm:mainTabView:suppliersTable"/>
 
             </p:commandButton>
-            <p:spacer width="20" rendered="#{!purchasingManager.user.privilege.canBeFinancialAdministrator}" />
+            <p:spacer width="20" rendered="#{!laboratoryManager.user.privilege.canBeFinancialAdministrator}" />
             <p:inputText id="supplierSearchText" 
                          placeholder="Enter search text"
                          style="width:200px" 
-                         rendered="#{!purchasingManager.user.privilege.canBeFinancialAdministrator}"
-                         value="#{purchasingManager.supplierSearchText}" >
+                         rendered="#{!laboratoryManager.user.privilege.canBeFinancialAdministrator}"
+                         value="#{laboratoryManager.supplierSearchText}" >
 
                 <p:ajax event="keyup"                            
                         global="false"
                         update=":appForm:mainTabView:suppliersTable"
-                        listener="#{purchasingManager.doSupplierSearch}"
+                        listener="#{laboratoryManager.doSupplierSearch}"
                         process="@this"/>
 
             </p:inputText>
         </p:toolbarGroup>
 
-        <p:toolbarGroup align="right" rendered="#{purchasingManager.user.privilege.canBeJMTSAdministrator}" >
+        <p:toolbarGroup align="right" rendered="#{laboratoryManager.user.privilege.canBeJMTSAdministrator}" >
             <h:outputLabel value="Active suppliers only: " for="activeSuppliersOnly" />  
             <h:panelGroup>
                 <p:selectBooleanCheckbox style="vertical-align: middle"
                                          id="activeSuppliersOnly"
-                                         value="#{purchasingManager.isActiveSuppliersOnly}" >
+                                         value="#{laboratoryManager.isActiveSuppliersOnly}" >
                     <p:ajax  update=":appForm:mainTabView:suppliersTable"
-                             listener="#{purchasingManager.doSupplierSearch}"
+                             listener="#{laboratoryManager.doSupplierSearch}"
                              event="change"                                      
                              process="@this"/>
                 </p:selectBooleanCheckbox>            
@@ -81,12 +81,12 @@ Email: info@dpbennett.com.jm
                  paginator="true"                                 
                  rows="15"
                  paginatorTemplate="{FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
-                 value="#{purchasingManager.foundSuppliers}">                        
+                 value="#{laboratoryManager.foundSuppliers}">                        
 
-        <p:ajax event="cellEdit" listener="#{purchasingManager.onSupplierCellEdit}" />
+        <p:ajax event="cellEdit" listener="#{laboratoryManager.onSupplierCellEdit}" />
 
         <f:facet name="header">
-            <h:outputText value="Search Results (found: #{purchasingManager.numOfSuppliersFound})" />
+            <h:outputText value="Search Results (found: #{laboratoryManager.numOfSuppliersFound})" />
         </f:facet>
 
         <p:column>
@@ -113,7 +113,7 @@ Email: info@dpbennett.com.jm
         </p:column>
 
         <p:column headerText="Active?" 
-                  rendered="#{purchasingManager.user.privilege.canAddSupplier}">                                                                         
+                  rendered="#{laboratoryManager.user.privilege.canAddSupplier}">                                                                         
             <p:cellEditor>                
                 <f:facet name="output">
                     <h:outputText value="#{supplier.isActive}" />
@@ -129,12 +129,12 @@ Email: info@dpbennett.com.jm
 
         <p:column style="width:32px">
             <p:commandButton icon="pi pi-pencil"
-                             actionListener="#{purchasingManager.editSelectedSupplier}"
+                             actionListener="#{laboratoryManager.editSelectedSupplier}"
                              process="@this"
                              title="View or edit this supplier's detail">
 
                 <f:setPropertyActionListener value="#{supplier}" 
-                                             target="#{purchasingManager.selectedSupplier}" />
+                                             target="#{laboratoryManager.selectedSupplier}" />
 
                 <p:ajax event="dialogReturn" 
                         update=":appForm:mainTabView:suppliersTable"/>
@@ -148,7 +148,7 @@ Email: info@dpbennett.com.jm
             <p:commandButton 
                 value="New"
                 icon="pi pi-plus" 
-                actionListener="#{purchasingManager.addNewSupplier}"                                            
+                actionListener="#{laboratoryManager.addNewSupplier}"                                            
                 process="@this"
                 title="Add a new supplier" >
 

@@ -28,10 +28,10 @@ Email: info@dpbennett.com.jm
 
         <h:panelGrid columns="2" cellspacing="5">
             <h:outputText value="Search type: " />
-            <p:selectOneMenu value="#{purchasingManager.searchType}" 
+            <p:selectOneMenu value="#{laboratoryManager.searchType}" 
                              style="width: 95%;">
 
-                <f:selectItems value="#{purchasingManager.searchTypes}" />
+                <f:selectItems value="#{laboratoryManager.searchTypes}" />
 
                 <p:ajax update="purchSearchPanel" 
                         process="@this" />
@@ -39,26 +39,26 @@ Email: info@dpbennett.com.jm
             </p:selectOneMenu>
 
             <h:outputText id="purchDateFieldLabel" value="Date field: " 
-                          rendered="#{purchasingManager.renderDateSearchFields}" />
-            <p:selectOneMenu value="#{purchasingManager.dateSearchPeriod.dateField}" 
+                          rendered="#{laboratoryManager.renderDateSearchFields}" />
+            <p:selectOneMenu value="#{laboratoryManager.dateSearchPeriod.dateField}" 
                              id="purchDateField"
-                             rendered="#{purchasingManager.renderDateSearchFields}"
+                             rendered="#{laboratoryManager.renderDateSearchFields}"
                              style="width: 95%;" >
                 <p:ajax                        
-                    listener="#{purchasingManager.updateDateSearchField}"
+                    listener="#{laboratoryManager.updateDateSearchField}"
                     process="@this" />
 
-                <f:selectItems value="#{purchasingManager.dateSearchFields}" />
+                <f:selectItems value="#{laboratoryManager.dateSearchFields}" />
 
             </p:selectOneMenu>
 
-            <h:outputText value="Date period: " rendered="#{purchasingManager.renderDateSearchFields}" />               
-            <p:selectOneMenu value= "#{purchasingManager.dateSearchPeriod.name}" 
-                             rendered="#{purchasingManager.renderDateSearchFields}"
+            <h:outputText value="Date period: " rendered="#{laboratoryManager.renderDateSearchFields}" />               
+            <p:selectOneMenu value= "#{laboratoryManager.dateSearchPeriod.name}" 
+                             rendered="#{laboratoryManager.renderDateSearchFields}"
                              id="purchDatePeriod"
                              style="width: 95%;" >
 
-                <p:ajax listener="#{purchasingManager.dateSearchPeriod.initDatePeriod}"
+                <p:ajax listener="#{laboratoryManager.dateSearchPeriod.initDatePeriod}"
                         update="purchStartSearchDate,purchEndSearchDate"
                         process="@this" />
 
@@ -66,35 +66,35 @@ Email: info@dpbennett.com.jm
 
             </p:selectOneMenu>
             <h:outputText value="Start:"  
-                          rendered="#{purchasingManager.renderDateSearchFields}" />
+                          rendered="#{laboratoryManager.renderDateSearchFields}" />
             <p:calendar id="purchStartSearchDate"
-                        rendered="#{purchasingManager.renderDateSearchFields}"
-                        value="#{purchasingManager.dateSearchPeriod.startDate}"                    
+                        rendered="#{laboratoryManager.renderDateSearchFields}"
+                        value="#{laboratoryManager.dateSearchPeriod.startDate}"                    
                         size="17"
                         navigator="true"
                         validator="requiredFieldValidator"
-                        disabled="#{purchasingManager.dateSearchPeriod.startDateDisabled}"
+                        disabled="#{laboratoryManager.dateSearchPeriod.startDateDisabled}"
                         pattern="MMM dd, yyyy" />
 
-            <h:outputText value="End:" rendered="#{purchasingManager.renderDateSearchFields}" />
+            <h:outputText value="End:" rendered="#{laboratoryManager.renderDateSearchFields}" />
             <p:calendar id="purchEndSearchDate"
-                        rendered="#{purchasingManager.renderDateSearchFields}"
-                        value="#{purchasingManager.dateSearchPeriod.endDate}"
+                        rendered="#{laboratoryManager.renderDateSearchFields}"
+                        value="#{laboratoryManager.dateSearchPeriod.endDate}"
                         size="17"
                         navigator="true"
                         validator="requiredFieldValidator"
-                        disabled="#{purchasingManager.dateSearchPeriod.endDateDisabled}"
+                        disabled="#{laboratoryManager.dateSearchPeriod.endDateDisabled}"
                         pattern="MMM dd, yyyy" />
 
         </h:panelGrid>   
         <p:toolbar>
             <p:toolbarGroup align="left" >
-                <p:inputText value="#{purchasingManager.searchText}"  
+                <p:inputText value="#{laboratoryManager.searchText}"  
                              id="searchText2"
                              style="width: 75%;" />  
 
                 <p:spacer width="5" />
-                <p:commandButton actionListener="#{purchasingManager.doSearch}"
+                <p:commandButton actionListener="#{laboratoryManager.doSearch}"
                                  update=":appForm:growl3"
                                  icon="pi pi-search"
                                  process="@form"/>

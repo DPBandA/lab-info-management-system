@@ -21,56 +21,58 @@ Email: info@dpbennett.com.jm
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://java.sun.com/jsf/facelets"> 
-    
-    <p:toolbar style="margin-bottom: 1px;" >
-        <p:toolbarGroup align="left">
-            <p:menuButton value="New" >  
 
-                <p:menuitem value="Purchase requisition"
-                            title="Create new purchase requisition"
-                            icon="pi pi-plus"
-                            actionListener="#{purchasingManager.createNewPurchaseReq}" 
-                            process="@this" >
+    <ui:remove>
+        <p:toolbar style="margin-bottom: 1px;" >
+            <p:toolbarGroup align="left">
+                <p:menuButton value="New" >  
 
-                    <p:ajax event="dialogReturn" 
-                            update=":appForm:mainTabView:purchasereqsTable"/>
+                    <p:menuitem value="Purchase requisition"
+                                title="Create new purchase requisition"
+                                icon="pi pi-plus"
+                                actionListener="#{laboratoryManager.createNewPurchaseReq}" 
+                                process="@this" >
 
-                </p:menuitem>
+                        <p:ajax event="dialogReturn" 
+                                update=":appForm:mainTabView:purchasereqsTable"/>
 
-                <p:menuitem value="Supplier"
-                            title="Create new supplier"
-                            icon="pi pi-plus"
-                            actionListener="#{purchasingManager.createNewSupplier}" 
-                            process="@this" >
+                    </p:menuitem>
 
-                    <p:ajax event="dialogReturn" 
-                            update=":appForm:mainTabView:suppliersTable"/>
+                    <p:menuitem value="Supplier"
+                                title="Create new supplier"
+                                icon="pi pi-plus"
+                                actionListener="#{laboratoryManager.createNewSupplier}" 
+                                process="@this" >
 
-                </p:menuitem>
+                        <p:ajax event="dialogReturn" 
+                                update=":appForm:mainTabView:suppliersTable"/>
 
-            </p:menuButton>    
+                    </p:menuitem>
 
-        </p:toolbarGroup>
-        <p:toolbarGroup align="right">
+                </p:menuButton>    
 
-            <p:menuButton value="Tools" >  
+            </p:toolbarGroup>
+            <p:toolbarGroup align="right">
 
-                <p:menuitem value="Purchase Requisitions"
-                            title="Open purchase requisition tab" 
-                            actionListener="#{purchasingManager.openPurchaseReqsTab}" 
-                            process="@this" />
+                <p:menuButton value="Tools" >  
 
-                <p:menuitem value="Suppliers"
-                            title="Open suppliers tab"
-                            actionListener="#{purchasingManager.openSuppliersTab}" 
-                            process="@this" />
+                    <p:menuitem value="Purchase Requisitions"
+                                title="Open purchase requisition tab" 
+                                actionListener="#{laboratoryManager.openPurchaseReqsTab}" 
+                                process="@this" />
 
-            </p:menuButton>         
-        </p:toolbarGroup>
-    </p:toolbar>
+                    <p:menuitem value="Suppliers"
+                                title="Open suppliers tab"
+                                actionListener="#{laboratoryManager.openSuppliersTab}" 
+                                process="@this" />
+
+                </p:menuButton>         
+            </p:toolbarGroup>
+        </p:toolbar>
+    </ui:remove>
 
     <ui:include src="purchSearch.xhtml"/>     
-   
+
 
 </html>
 

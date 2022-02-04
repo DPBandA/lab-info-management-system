@@ -46,8 +46,8 @@
     </navigation-rule> 
     
     <managed-bean>
-        <managed-bean-name>purchasingManager</managed-bean-name>
-        <managed-bean-class>jm.com.dpbennett.pm.manager.PurchasingManager</managed-bean-class>
+        <managed-bean-name>laboratoryManager</managed-bean-name>
+        <managed-bean-class>jm.com.dpbennett.pm.manager.LaboratoryManager</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
     

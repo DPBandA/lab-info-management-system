@@ -33,13 +33,38 @@ Email: info@dpbennett.com.jm
         <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
         <meta http-equiv="pragma" content="no-cache" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-        <title>#{purchasingManager.applicationHeader}</title>        
+        <title>#{laboratoryManager.applicationHeader}</title>        
         <script type="text/javascript" src="js/javascripts.js" />   
         <link rel="stylesheet" href="css/main.css" />   
-        <link rel="shortcut icon" type="image/x-icon" href="#{purchasingManager.appShortcutIconURL}" />
+        <link rel="shortcut icon" type="image/x-icon" href="#{laboratoryManager.appShortcutIconURL}" />
+        <style type="text/css">
+
+            .lightgreybg {
+                background-color:lightgrey !important;
+                background-image: none !important;
+                color: #000000 !important;
+            }
+            .lightgreenbg {
+                background-color:lightgreen !important;
+                background-image: none !important;
+                color: #000000 !important;
+            }
+            .orangeredbg {
+                background-color:orangered !important;
+                background-image: none !important;
+                color: #000000 !important;
+            }
+            .yellowbg {
+                background-color:yellow !important;
+                background-image: none !important;
+                color: #000000 !important;
+            }
+
+        </style>
     </h:head>
     <h:body>
 
+        <ui:include src="accpac/accPacClientInformationDialog.xhtml"/> 
         <ui:include src="common/commonDialogs.xhtml" />
         <ui:include src="admin/loginDialog.xhtml"/>  
         <ui:include src="common/preferencesDialog.xhtml"/> 
@@ -61,7 +86,7 @@ Email: info@dpbennett.com.jm
                                             height="41" width="179"/>
                             <h:panelGrid columns="1">   
 
-                                <h:outputText value="#{purchasingManager.applicationHeader}"
+                                <h:outputText value="#{laboratoryManager.applicationHeader}"
                                               style="color: darkgrey; font-size: 14pt; font-weight: bold;" />
 
                                 <h:outputText value="#{systemManager.applicationSubheader}"
@@ -105,7 +130,7 @@ Email: info@dpbennett.com.jm
                                     value=""  
                                     update=":appForm:growl3"
                                     title="This is the default button that accepts the enter key press" 
-                                    actionListener="#{purchasingManager.doDefaultSearch}"
+                                    actionListener="#{laboratoryManager.doDefaultSearch}"
                                     process="@form"/>                    
 
                                 <p:defaultCommand id="dashboardDefaultCommandButton" 
@@ -123,22 +148,34 @@ Email: info@dpbennett.com.jm
                                             process="@this"
                                             listener="#{systemManager.onDashboardTabChange}" />
 
-                                    <p:tab title="#{t.name}" > 
+                                    <p:tab title="#{t.name}" >
 
                                         <h:panelGroup rendered="#{t.id == 'System Administration'}">
                                             <ui:include src="dashboard/admin/generalAdminTab.xhtml" />
-                                        </h:panelGroup>
-
-                                        <h:panelGroup rendered="#{t.id == 'Procurement'}">
-                                            <ui:include src="dashboard/finance/purch/purchaseAdminTab.xhtml" />
                                         </h:panelGroup>
 
                                         <h:panelGroup rendered="#{t.id == 'Financial Administration'}">
                                             <ui:include src="dashboard/finance/financialAdminTab.xhtml" />
                                         </h:panelGroup>
 
+                                        <h:panelGroup rendered="#{t.id == 'Client Management'}">
+                                            <ui:include src="dashboard/client/clientsTab.xhtml" />
+                                        </h:panelGroup>
+
                                         <h:panelGroup rendered="#{t.id == 'Human Resource'}">
                                             <ui:include src="dashboard/hrm/hrmTab.xhtml" />
+                                        </h:panelGroup> 
+
+                                        <h:panelGroup rendered="#{t.id == 'Report Management'}">
+                                            <ui:include src="dashboard/report/reportTab.xhtml" />
+                                        </h:panelGroup>
+
+                                        <h:panelGroup rendered="#{t.id == 'Job Management'}">
+                                            <ui:include src="dashboard/job/jobsTab.xhtml" />
+                                        </h:panelGroup>
+
+                                        <h:panelGroup rendered="#{t.id == 'Procurement'}">
+                                            <ui:include src="dashboard/finance/purch/purchaseAdminTab.xhtml" />
                                         </h:panelGroup>
 
                                     </p:tab>   
@@ -221,10 +258,34 @@ Email: info@dpbennett.com.jm
 
 
                                 <p:tab title="#{t.name}" closable="true"  >
+                                    
+                                    <h:panelGroup  rendered="#{t.id == 'Financial Administration'}">
+                                        <ui:include src="finance/financialAdminTab.xhtml" /> 
+                                    </h:panelGroup>
+
+                                    <h:panelGroup rendered="#{t.id == 'Human Resource'}" >
+                                        <ui:include src="hr/hrmTab.xhtml" /> 
+                                    </h:panelGroup>
 
                                     <h:panelGroup rendered="#{t.id == 'System Administration'}" >
                                         <ui:include src="admin/generalAdminTab.xhtml" /> 
-                                    </h:panelGroup>  
+                                    </h:panelGroup>   
+
+                                    <h:panelGroup rendered="#{t.id == 'Clients'}" >
+                                        <ui:include src="client/clientsTab.xhtml" />                                                                
+                                    </h:panelGroup>
+
+                                    <h:panelGroup rendered="#{t.id == 'Reports'}" >
+                                        <ui:include src="report/reportsTab.xhtml" />                                                                
+                                    </h:panelGroup>
+
+                                    <h:panelGroup rendered="#{t.id == 'Report Templates'}" >
+                                        <ui:include src="report/reportTemplatesTab.xhtml" />                                                               
+                                    </h:panelGroup>
+
+                                    <h:panelGroup rendered="#{t.id == 'Job Browser'}">                                
+                                        <ui:include src="job/jobBrowser.xhtml" /> 
+                                    </h:panelGroup>
 
                                     <h:panelGroup rendered="#{t.id == 'Purchase Requisitions'}" >
                                         <ui:include src="finance/purch/purchreqsTab.xhtml" />                                                                
@@ -232,14 +293,6 @@ Email: info@dpbennett.com.jm
 
                                     <h:panelGroup rendered="#{t.id == 'Suppliers'}" >
                                         <ui:include src="finance/purch/suppliersTab.xhtml" />                                                                
-                                    </h:panelGroup>
-
-                                    <h:panelGroup rendered="#{t.id == 'Human Resource'}" >
-                                        <ui:include src="hr/hrmTab.xhtml" /> 
-                                    </h:panelGroup>
-
-                                    <h:panelGroup  rendered="#{t.id == 'Financial Administration'}">
-                                        <ui:include src="finance/financialAdminTab.xhtml" /> 
                                     </h:panelGroup>
 
                                 </p:tab>
