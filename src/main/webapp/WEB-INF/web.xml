@@ -7,7 +7,7 @@
             /WEB-INF/faces-config-sm.xml,             
             /WEB-INF/faces-config-hrm.xml,
             /WEB-INF/faces-config-fm.xml,
-            /WEB-INF/faces-config-pm.xml
+            /WEB-INF/faces-config-lims.xml
         </param-value>
     </context-param>
 

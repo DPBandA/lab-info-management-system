@@ -3,13 +3,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>jm.com.dpbennett</groupId>
-    <artifactId>purchase-management</artifactId>
-    <version>2.0.1</version>
+    <artifactId>lab-info-management-system</artifactId>
+    <version>1.0.0</version>
     <packaging>war</packaging>
 
-    <name>PM, v2</name>
+    <name>LIMS, v1</name>
     
-    <description>An enterprise web application for managing purchases.</description>
+    <description>An enterprise web application for managing a lab's information..</description>
 
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
@@ -19,8 +19,8 @@
     <dependencies>          
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>purchase-management-library</artifactId>
-            <version>2.0.0</version>
+            <artifactId>lab-info-management-system-lib</artifactId>
+            <version>1.0.0</version>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
